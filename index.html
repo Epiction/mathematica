@@ -1,72 +1,84 @@
 <!doctype html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Notepad</title>
+    <title>Mathematica AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6/build/styles/felipec.min.css">
     <link rel="stylesheet" href="style.css">
+    
 </head>
-
 <body>
-    <header>
-        <div class="navbar">
-            <div class="nav-logo">
-                <a href="index.html">Mathematica AI</a>
-            </div>
-            <div class="nav-items">
-                <ul>
-                    <li><a href="index.html"> Home </a></li>
-                    <li><a href="https://mathjs.org/docs/expressions/syntax.html" target="_blank"> Docs </a></li>
-                    <li><a href="sponser.html"> Sponser us </a></li>
-                    <li><a href="tutorial.html"> Tutorials </a></li>
-                    <li><a href="https://epiction.co"> Epiction </a></li>
-                </ul>
-            </div>
-            <!-- <div class="nav-button">
-          <div class="anim-layer">
-            <a href="application.html">Get Full Access</a>
-          </div>
-        </div> -->
-        </div>
-    </header>
-
-
-
-    <div class="container">
-        <div id="input" class="editor language-mathjs" ondrop="dropHandler(event)"></div>
-
-        <div id="output" class="editor language-mathjs"></div>
-        <div class="mathlive">
-            <p># MathJS Documentation</p><br>
-            <div id="mathjs-docs"></div>
-        </div>
-        <div class="chat-section">
-            <div class="chat-container" id="chat-container"></div>
-            <input type="text" class="input-field" id="input-field" placeholder="Ask a question about your code...">
-        </div>
-    </div>
-
     <div id="mobile-warning" class="mobile-warning">
         <h1>Sorry, this tool is not optimized for mobile devices.</h1>
         <p>Please use a desktop or laptop computer for the best experience.</p>
     </div>
-
+    <div class="main-layout">
+        <nav class="sidebar">
+            <div class="nav-logo">
+                <a href="index.html" style="color:inherit;text-decoration:none;">Mathematica AI</a>
+            </div>
+            <div class="nav-items">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="https://mathjs.org/docs/expressions/syntax.html" target="_blank">Docs</a></li>
+                    <li><a href="sponser.html">Sponsor us</a></li>
+                    <li><a href="tutorial.html">Tutorials</a></li>
+                    <li><a href="https://epiction.co">Epiction</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="content-area">
+            <div class="editor-section">
+                <div class="editor-card">
+                    <h2>Input</h2>
+                    <div id="input" class="editor language-mathjs" ondrop="dropHandler(event)" placeholder="Type a MathJS expression, e.g. 2+2 or sin(pi/4)"></div>
+                    <div class="editor-actions">
+                        <button id="run-btn" title="Evaluate the expression (Shift+Enter)">Run</button>
+                        <button id="clear-btn" title="Clear input">Clear</button>
+                        <span class="editor-tip">Tip: Shift+Enter to run</span>
+                    </div>
+                </div>
+                <div class="editor-card">
+                    <h2>Output</h2>
+                    <div id="output" class="editor language-mathjs" placeholder="Results will appear here"></div>
+                </div>
+            </div>
+            <div class="mathlive">
+                <p>MathJS Documentation</p>
+                <div id="mathjs-docs"></div>
+            </div>
+            <div class="chat-section">
+                <div class="chat-header">
+                    <span>AI Assistant</span>
+                    <span class="chat-tip" title="Ask about math, code, or results!">?</span>
+                </div>
+                <div class="chat-container" id="chat-container"></div>
+                <div class="chat-input-row">
+                    <input type="text" class="input-field" id="input-field" placeholder="Ask a question about your code, e.g. 'Explain this result'">
+                    <button id="send-btn" title="Send message to AI">Send</button>
+                </div>
+                <div class="chat-examples">
+                    <span>Examples:</span>
+                    <button class="example-btn">What does this expression do?</button>
+                    <button class="example-btn">How do I use the derivative function?</button>
+                    <button class="example-btn">Why is my result NaN?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.0/lib/browser/math.min.js"></script>
+    <script src="hljs/mathjs.js"></script>
+    <script type="module">
+        import { CodeJar } from 'https://medv.io/codejar/codejar.js';
+        const input = document.getElementById('input');
+        const output = document.getElementById('output');
+        window.editor = CodeJar(input, hljs.highlightElement);
+        window.results = CodeJar(output, hljs.highlightElement);
+    </script>
+    <script src="script.js" defer></script>
+    <script src="router.js" defer></script>
 </body>
-
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6/build/highlight.min.js"></script>
-<script type="module">
-    import {
-        CodeJar
-    } from 'https://medv.io/codejar/codejar.js';
-    window.editor = CodeJar(input, hljs.highlightElement);
-    window.results = CodeJar(output, hljs.highlightElement);
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjs@11.0/lib/browser/math.min.js"></script>
-<script src="hljs/mathjs.js"></script>
-
-<script src="script.js" defer></script>
-
-<script src="router.js"></script>
-<script src="api.js"></script>
-
 </html>
